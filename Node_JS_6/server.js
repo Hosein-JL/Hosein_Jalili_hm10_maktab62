@@ -18,11 +18,9 @@ http
         response.end(style);
       });
     } else if (request.url === "/Iran" && request.method === "GET") {
-      fs.readFile("./Node_JS_6/Iran.jpg", "utf-8", (err, img) => {
-        if (err) return response.end(errPage);
-        response.writeHead(200, { "Content-type": "image/jpg" });
-        response.end(img);
-      });
+      const readStream = fs.createReadStream("./Node_JS_6/Iran1.png");
+      response.writeHead(200, { "Content-type": "image/png" });
+      readStream.pipe(response);
     } else if (request.url === "/main" && request.method === "GET") {
       fs.readFile("./Node_JS_6/main.js", "utf-8", (err, script) => {
         if (err) return response.end(errPage);
